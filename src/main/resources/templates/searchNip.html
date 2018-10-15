@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Pilot</title>
+<title>Home</title>
+	<object th:include="fragments/fragment ::css" th:remove="tag"></object>
+	<object th:include="fragments/fragment ::js" th:remove="tag"></object>
+</head>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<h2>Lihat Data Pegawai</h2>
+	<h3 th:text=${pegawai.nip}></h3>
+	<h3 th:text=${pegawai.nama}></h3>
+	<h3 th:text=${pegawai.tempatLahir}></h3>
+	<h3 th:text=${pegawai.tanggalLahir}></h3>
+	<h3 th:text=${pegawai.tahunMasuk}></h3>
+	<div th:each="instansi:${pegawai.instansi}">
+		<h3 th:text="${instansi.nama}"></h3>
+	</div>
+	<div th:each="jabatan:${pegawai.jabatanList}">
+		<h3 th:text="${jabatan.nama}"></h3>
+	</div>
+	<h3 th:text=${gaji}></h3>
+	
+
+
+	<script>
+		function gaji() {
+			var x = "${pegawai.instansi.provinsi.tunjangan}"
+			
+			document.getElementById("gaji").innerHTML = 
+		}
+	</script>
+
+</body>
+</html>
