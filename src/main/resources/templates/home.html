@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Home</title>
-	<object th:include="fragments/fragment ::css" th:remove="tag"></object>
-	<object th:include="fragments/fragment ::js" th:remove="tag"></object>
+<title>Home</title>
+<object th:include="fragments/fragment ::css" th:remove="tag"></object>
+<object th:include="fragments/fragment ::js" th:remove="tag"></object>
 </head>
 
 <body>
-	<nav th:replace="fragments/fragment :: navbar"></nav>	
-	<h3>Cari pegawai berdasarkan nip</h3>
-	<form th:action="@{/pegawai}" method="GET">
-		NIP: <br>
-		<input type = "text" name="nip" />
-		<button type="submit">Cari</button>
-	</form>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<div class="container-fluid">
+		<br>
+		<h3>Welcome to SIPEG</h3>
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">Cari Pegawai Berdasarkan Nip</div>
+					<div class="card-body">
+						<form th:action="@{/pegawai}" method="GET">
+							Pilih NIP: <br> 
+							<input type="text" name="nip" />
+							<button class="btn btn-primary" type="submit">Cari</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">Lihat Detail Jabatan</div>
+					<div class="card-body">
+						Pilih Jabatan: <br>
+						<form th:action="@{/jabatan/view}" method="GET">
+							<select id="location" th:name="idJabatan">
+								<option disabled="disabled" selected="selected">--
+									Pilih Jabatan --</option>
+								<option th:each="jabatan : ${jabatan}" th:value="${jabatan.id}"
+									th:text="${jabatan.nama}"></option>
+							</select>
+							<button class="btn btn-primary" type="submit">Cari</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
