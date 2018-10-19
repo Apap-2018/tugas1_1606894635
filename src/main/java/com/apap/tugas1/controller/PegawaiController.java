@@ -1,6 +1,5 @@
 package com.apap.tugas1.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +58,7 @@ public class PegawaiController {
 		System.out.println(gaji);
 		System.out.println(pegawai.getInstansi().getProvinsi().getPresentaseTunjangan());
 		model.addAttribute("gaji", gaji);
-		return "searchNip";
+		return "pegawaiLihat";
 	}
 
 	//membuat pegawai	
@@ -140,6 +139,7 @@ public class PegawaiController {
 		pegawaiService.updatePegawai(pegawai, idPegawai);
 
 		System.out.println("update udah ke sini");
+		model.addAttribute("nip", nip);
 		return "update";
 	}
 

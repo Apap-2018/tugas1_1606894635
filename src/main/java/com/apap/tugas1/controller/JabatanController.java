@@ -1,5 +1,7 @@
 package com.apap.tugas1.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,11 @@ public class JabatanController {
 	// melihat jabatan
 	@RequestMapping(value = "/jabatan/view" , method = RequestMethod.GET)
 	private String viewJabatan(Model model, @RequestParam(value = "idJabatan") long idJabatan) {
-		model.addAttribute("jabatan", jabatanService.findJabatanById(idJabatan));
+		JabatanModel jabatan = jabatanService.findJabatanById(idJabatan);
+		if(jabatan == null) {
+			return "error";
+		}
+		model.addAttribute("jabatan", jabatan);
 		return "jabatanView";
 	}
 
@@ -32,7 +38,7 @@ public class JabatanController {
 	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.POST)
 	private String addJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		jabatanService.addJabatan(jabatan);
-		return "add";
+		return "addJabatan";
 	}
 
 	@RequestMapping(value = "/jabatan/ubah", method = RequestMethod.GET)
@@ -46,7 +52,7 @@ public class JabatanController {
 	private String updatePilotSubmit(@ModelAttribute JabatanModel jabatan, @RequestParam(value = "idJabatan") long idJabatan, Model model) {
 		jabatan.setId(idJabatan);
 		jabatanService.updateJabatan(jabatan);
-		return "update";
+		return "updateJabatan";
 	}
 	
 	@RequestMapping(value = "/jabatan/hapus", method = RequestMethod.POST)
@@ -57,7 +63,13 @@ public class JabatanController {
 	
 	@RequestMapping(value = "/jabatan/viewall")
 	private String viewJabatan(Model model){
-		model.addAttribute("listOfJabatan", jabatanService.getListJabatan());	
+		List <JabatanModel> listOfJabatan = jabatanService.getListJabatan();
+		for (JabatanModel i: listOfJabatan) {
+			i.setSize(i.getList().size());
+		}
+		model.addAttribute("listOfJabatan", listOfJabatan);	
+		
+		
 		return "jabatanViewAll";
 	}
 	

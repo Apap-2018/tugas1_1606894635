@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Pilot</title>
+<title>Home</title>
+<object th:include="fragments/fragment ::css" th:remove="tag"></object>
+<object th:include="fragments/fragment ::js" th:remove="tag"></object>
+</head>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
+	<div class="container-fluid">
+		<h2>Lihat Data Pegawai</h2>
+		<br>
+		<div class="row">
+			<div class=col-md-6>
+				<div class="card">
+					<div class="card-header" th:text="${pegawai.nama}"></div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-4">
+								<p>NIP</p>
+							</div>
+							<div class="col-md-8">
+								<p th:text="${pegawai.nip}"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<p>TTL</p>
+							</div>
+							<div class="col-md-8">
+								<p
+									th:text="${pegawai.tempatLahir} + ', ' + ${pegawai.tanggalLahir}"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<p>Tahun Masuk</p>
+							</div>
+							<div class="col-md-8">
+								<p th:text="${pegawai.tahunMasuk}"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<p>Instansi</p>
+							</div>
+							<div class="col-md-8">
+								<div th:each="instansi:${pegawai.instansi}">
+									<p th:text="${instansi.nama}"></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<p>Jabatan</p>
+							</div>
+							<div class="col-md-8">
+								<div th:each="jabatan:${pegawai.jabatanList}">
+									<ul>
+										<li th:text="${jabatan.nama}"></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<p>Gaji</p>
+							</div>
+							<div class="col-md-8">
+								<p
+									th:text="'Gaji	= ' + ${#numbers.formatDecimal(gaji, 0, 'COMMA', 2, 'POINT')}"></p>
+							</div>
+						</div>
+						<form th:action="@{/pegawai/ubah}" method="GET">
+							<input type="hidden" th:name="nip" th:value="${pegawai.nip}" />
+							<button value="submit" class="btn btn-primary">Ubah Data</button>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

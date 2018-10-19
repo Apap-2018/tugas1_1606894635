@@ -12,12 +12,12 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<br>
 	<div class="container-fluid">
-		<h2>Lihat Data Pegawai</h2>
+		<h3>Cek Pegawai Termuda - Tertua</h3>
 		<br>
 		<div class="row">
 			<div class=col-md-6>
 				<div class="card">
-					<div class="card-header" th:text="${muda.nama}"></div>
+					<div class="card-header" th:text="${muda.nama} + ' - Pegawai Tertua'"></div>
 					<div class="card-body">
 						<p th:text="'NIP	= ' + ${muda.nip}"></p>
 						<p
@@ -35,10 +35,10 @@
 					</div>
 				</div>
 			</div>
-		
+
 			<div class=col-md-6>
 				<div class="card">
-					<div class="card-header" th:text="${tua.nama}"></div>
+					<div class="card-header" th:text="${tua.nama} + ' - Pegawai Termuda'"></div>
 					<div class="card-body">
 						<p th:text="'NIP	= ' + ${tua.nip}"></p>
 						<p

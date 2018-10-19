@@ -18,31 +18,45 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "jabatan")
 public class JabatanModel implements Serializable {
+	private int size = 0;
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	public int getSize() {
+		return this.size;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
 	@Size(max = 255)
 	@Column(name = "nama", nullable = false)
 	private String nama;
-	
+
 	@NotNull
 	@Size(max = 255)
 	@Column(name = "deskripsi", nullable = false)
 	private String deskripsi;
-	
+
 	@NotNull
 	@Column(name = "gaji_pokok", nullable = false)
 	private double gajiPokok;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY,
-		cascade = {
-				CascadeType.PERSIST,
-				CascadeType.MERGE
-		},
-		mappedBy = "jabatanList")
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+	},
+			mappedBy = "jabatanList")
 	private List<PegawaiModel> pegawaiList;
+	
+	public List<PegawaiModel> getList(){
+		return pegawaiList;
+	}
 
 	public long getId() {
 		return id;
@@ -75,5 +89,5 @@ public class JabatanModel implements Serializable {
 	public void setGajiPokok(double gajiPokok) {
 		this.gajiPokok = gajiPokok;
 	}
-	
+
 }

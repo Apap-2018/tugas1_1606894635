@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Lihat Semua Jabatan</title>
-		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
-		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
-		<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
-	</head>
-	<body>
-		<nav th:replace="fragments/fragment :: navbar"></nav>
+<head>
+<title>Lihat Semua Jabatan</title>
+<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+<script type="text/javascript" charset="utf8"
+	src="	https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+</head>
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
+	<div class="container-fluid">
+		<h3>Daftar Jabatan</h3>
 		<br>
 		<table id="jabatan">
-		    <thead>
-		        <tr>
-		            <th>Nama</th>
-		            <th>Deskripsi</th>
-	           	  	<th>Gaji Pokok</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <tr th:each = "jabatan: ${listOfJabatan}">
-		            <td th:text="${jabatan.nama}"></td>
-          		    <td th:text="${jabatan.deskripsi}"></td>
-         		    <td th:text="${#numbers.formatDecimal(jabatan.gajiPokok, 0, 'COMMA', 2, 'POINT')}"></td>    
-		        </tr>
-		    </tbody>
+			<thead>
+				<tr>
+					<th>Nama</th>
+					<th>Deskripsi</th>
+					<th>Gaji Pokok</th>
+					<th>Jumlah Pegawai</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="jabatan: ${listOfJabatan}">
+					<td th:text="${jabatan.nama}"></td>
+					<td th:text="${jabatan.deskripsi}"></td>
+					<td
+						th:text="${#numbers.formatDecimal(jabatan.gajiPokok, 0, 'COMMA', 2, 'POINT')}"></td>
+					<td th:text="${jabatan.size}"></td>
+				</tr>
+			</tbody>
 		</table>
-	</body>
-	<script>
+	</div>
+</body>
+<script>
 			$(document).ready(function () {
 			    $('#jabatan').DataTable();
 			});	
