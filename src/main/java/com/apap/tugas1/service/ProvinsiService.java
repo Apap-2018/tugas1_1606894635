@@ -8,6 +8,9 @@ import com.apap.tugas1.model.ProvinsiModel;
 
 @Service
 public interface ProvinsiService {
+
 	List<ProvinsiModel> getListProv();
+
 	ProvinsiModel getProvinsiDetailById(long provinsiId);
+
 }

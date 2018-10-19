@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Add Pegawai</title>
+<title>Update Pegawai</title>
 <object th:include="fragments/fragment ::css" th:remove="tag"></object>
 <object th:include="fragments/fragment ::js" th:remove="tag"></object>
 <script
@@ -14,15 +14,16 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<div class="container-fluid">
 		<br>
-		<h3>Tambah Pegawai</h3>
+		<h3>Update Pegawai</h3>
 		<br>
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card">
-					<div class="card-header">Pegawai Baru</div>
+					<div class="card-header">Isi Data Pegawai</div>
 					<div class="card-body">
-						<form th:action="@{/pegawai/tambah}" th:object="${pegawai}"
+						<form th:action="@{/pegawai/ubah}" th:object="${pegawai}"
 							method="POST">
+							<input type="hidden" name="id" th:value="${pegawai.id}">
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-md-6">
@@ -103,6 +104,7 @@
 									</div>
 								</div>
 							</div>
+							
 						</form>
 					</div>
 				</div>

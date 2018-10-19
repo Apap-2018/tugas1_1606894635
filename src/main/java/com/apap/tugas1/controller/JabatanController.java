@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.service.JabatanService;
@@ -19,12 +18,12 @@ public class JabatanController {
 
 	// melihat jabatan
 	@RequestMapping(value = "/jabatan/view" , method = RequestMethod.GET)
-	private String addJabatan(Model model, @RequestParam(value = "idJabatan") long idJabatan) {
+	private String viewJabatan(Model model, @RequestParam(value = "idJabatan") long idJabatan) {
 		model.addAttribute("jabatan", jabatanService.findJabatanById(idJabatan));
 		return "jabatanView";
 	}
 
-	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.GET)
+	@RequestMapping(value = "/jabatan/tambah")
 	private String add(Model model) {
 		model.addAttribute("jabatan", new JabatanModel());
 		return "jabatanAdd";
@@ -54,7 +53,13 @@ public class JabatanController {
 	private String deleteJabatan(@RequestParam(value = "idJabatan") long idJabatan, Model model){
 		jabatanService.deleteJabatan(idJabatan);
 		return "delete";
-		
 	}
+	
+	@RequestMapping(value = "/jabatan/viewall")
+	private String viewJabatan(Model model){
+		model.addAttribute("listOfJabatan", jabatanService.getListJabatan());	
+		return "jabatanViewAll";
+	}
+	
 
 }

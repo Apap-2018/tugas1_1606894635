@@ -13,19 +13,16 @@ import com.apap.tugas1.repository.ProvinsiDb;
 @Service
 @Transactional
 public class ProvinsiServiceImpl implements ProvinsiService{
-	
 	@Autowired
 	ProvinsiDb provinsiDb;
 
 	@Override
-	public List<ProvinsiModel> getListProv() {	
+	public List<ProvinsiModel> getListProv() {
 		return provinsiDb.findAll();
 	}
 
 	@Override
-	public ProvinsiModel getProvinsiDetailById(long id) {
-		return provinsiDb.findById(id).get();
+	public ProvinsiModel getProvinsiDetailById(long provinsiId) {
+		return provinsiDb.findById(provinsiId).get();
 	}
-	
-	
 }

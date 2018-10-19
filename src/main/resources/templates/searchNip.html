@@ -32,11 +32,16 @@
 								<li th:text="'Jabatan	= ' + ${jabatan.nama}"></li>
 							</ul>
 						</div>
-						<p th:text="'Gaji	= ' + ${#numbers.formatDecimal(gaji, 0, 'COMMA', 2, 'POINT')}"></p>
-						</div>
+						<p
+							th:text="'Gaji	= ' + ${#numbers.formatDecimal(gaji, 0, 'COMMA', 2, 'POINT')}"></p>
+						<form th:action="@{/pegawai/ubah}" method="GET">
+							<input type="hidden" th:name="nip" th:value="${pegawai.nip}" />
+							<button value="submit" class="btn btn-primary">Ubah Data</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
