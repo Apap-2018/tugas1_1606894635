@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Pilot</title>
+<title>Home</title>
+<object th:include="fragments/fragment ::css" th:remove="tag"></object>
+<object th:include="fragments/fragment ::js" th:remove="tag"></object>
+</head>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
+	<div class="container-fluid">
+		<h2>Lihat Data Pegawai</h2>
+		<br>
+		<div class="row">
+			<div class=col-md-6>
+				<div class="card">
+					<div class="card-header" th:text="${muda.nama}"></div>
+					<div class="card-body">
+						<p th:text="'NIP	= ' + ${muda.nip}"></p>
+						<p
+							th:text="'TTL	= ' + ${muda.tempatLahir} + ', ' + ${muda.tanggalLahir}"></p>
+						<p th:text="'Tahun Masuk	= ' + ${muda.tahunMasuk}"></p>
+						<div th:each="instansi:${muda.instansi}">
+							<p th:text="'Instansi	= ' + ${instansi.nama}"></p>
+						</div>
+						<p>Jabatan :</p>
+						<div th:each="jabatan:${muda.jabatanList}">
+							<ul>
+								<li th:text="'Jabatan	= ' + ${jabatan.nama}"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class=col-md-6>
+				<div class="card">
+					<div class="card-header" th:text="${tua.nama}"></div>
+					<div class="card-body">
+						<p th:text="'NIP	= ' + ${tua.nip}"></p>
+						<p
+							th:text="'TTL	= ' + ${tua.tempatLahir} + ', ' + ${tua.tanggalLahir}"></p>
+						<p th:text="'Tahun Masuk	= ' + ${tua.tahunMasuk}"></p>
+						<div th:each="instansi:${tua.instansi}">
+							<p th:text="'Instansi	= ' + ${instansi.nama}"></p>
+						</div>
+						<p>Jabatan :</p>
+						<div th:each="jabatan:${tua.jabatanList}">
+							<ul>
+								<li th:text="'Jabatan	= ' + ${jabatan.nama}"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

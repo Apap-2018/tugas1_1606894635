@@ -1,5 +1,6 @@
 package com.apap.tugas1.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class PegawaiController {
 
 	@RequestMapping("/")
 	private String home(Model model) {
-		model.addAttribute("jabatan", jabatanService.getListJabatan());
+		model.addAttribute("listOfJabatan", jabatanService.getListJabatan());
+		model.addAttribute("listOfInstansi", instansiService.getInstansiList());
 		return "home";
 	}
 
@@ -106,7 +108,7 @@ public class PegawaiController {
 		model.addAttribute("listOfJabatan", jabatanService.getListJabatan());
 		return "pegawaiUpdate";
 	}
-	
+
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST)
 	private String updatePilotSubmit(@ModelAttribute PegawaiModel pegawai, @RequestParam(value = "id", required = true) long idPegawai, Model model) {
 		String nip = "";
@@ -134,9 +136,9 @@ public class PegawaiController {
 		pegawai.getNama();
 		pegawai.setNip(nip);
 		System.out.println("keren" + pegawai.getNip());
-		
+
 		pegawaiService.updatePegawai(pegawai, idPegawai);
-		
+
 		System.out.println("update udah ke sini");
 		return "update";
 	}
@@ -156,4 +158,31 @@ public class PegawaiController {
 		return provinsi.getInstansiList(); 
 	}
 
+	@RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
+	private String tertuaTermuda(@RequestParam(value = "idInstansi") long id, Model model) {
+		List<PegawaiModel> listOfPegawai =  instansiService.getInstansiById(id).getPegawaiInstansi();
+		PegawaiModel muda = listOfPegawai.get(0);
+
+		for(int i = 0; i < listOfPegawai.size(); i++) {
+			if(i+1 != listOfPegawai.size()) {
+				if(	muda.getTanggalLahir().after(listOfPegawai.get(i+1).getTanggalLahir())) {
+					muda = listOfPegawai.get(i+1);
+				}
+			}
+		}
+		PegawaiModel tua = listOfPegawai.get(0);
+
+		for(int i = 0; i < listOfPegawai.size(); i++) {
+			if(i+1 != listOfPegawai.size()) {
+				if(	tua.getTanggalLahir().before(listOfPegawai.get(i+1).getTanggalLahir())) {
+					tua = listOfPegawai.get(i+1);
+				}
+			}
+		}
+		System.out.println(muda.getJabatanList());
+		System.out.println(tua.getJabatanList());
+		model.addAttribute("tua", tua);
+		model.addAttribute("muda", muda);
+		return "viewTertuaTermuda";
+	}
 }
