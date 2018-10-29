@@ -53,11 +53,10 @@ public class JabatanModel implements Serializable {
 	},
 			mappedBy = "jabatanList")
 	private List<PegawaiModel> pegawaiList;
-	
-	public List<PegawaiModel> getList(){
-		return pegawaiList;
-	}
 
+	public int size() {
+		return pegawaiList.size();
+	}
 	public long getId() {
 		return id;
 	}

@@ -52,7 +52,6 @@ public class PegawaiController {
 				gajiPokok = jabatan.getGajiPokok();
 			}
 		}
-
 		System.out.println(gajiPokok);
 		double gaji = gajiPokok + (pegawai.getInstansi().getProvinsi().getPresentaseTunjangan() *0.01 * gajiPokok);
 		System.out.println(gaji);
@@ -64,7 +63,9 @@ public class PegawaiController {
 	//membuat pegawai	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
 	private String add(Model model) {
-		model.addAttribute("pegawai", new PegawaiModel());
+		PegawaiModel pegawai = new PegawaiModel();
+		pegawai.setInstansi(new InstansiModel());
+		model.addAttribute("pegawai", pegawai);
 		model.addAttribute("listOfProvinsi", provinsiService.getListProv());
 		model.addAttribute("listOfJabatan", jabatanService.getListJabatan());
 		return "pegawaiTambah";

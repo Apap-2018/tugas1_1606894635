@@ -65,7 +65,7 @@ public class JabatanController {
 	private String viewJabatan(Model model){
 		List <JabatanModel> listOfJabatan = jabatanService.getListJabatan();
 		for (JabatanModel i: listOfJabatan) {
-			i.setSize(i.getList().size());
+			i.setSize(i.size());
 		}
 		model.addAttribute("listOfJabatan", listOfJabatan);	
 		

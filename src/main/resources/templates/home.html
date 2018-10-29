@@ -20,10 +20,10 @@
 						<form th:action="@{/pegawai}" method="GET">
 							<div style="text-align: left;" class="row">
 								<div class="col-md-2">Pilih NIP</div>
-								<div class="col-md-4">
+								<div class="col-md-8">
 									<input class="form-control" type="text" name="nip" />
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<button class="btn btn-primary" type="submit">Cari</button>
 								</div>
 							</div>
@@ -37,7 +37,7 @@
 					<div class="card-body">
 						<form th:action="@{/jabatan/view}" method="GET">
 							<div class="row">
-								<div class="col-mx-1">Pilih Jabatan</div>
+								<div class="col-md-2">Pilih Jabatan</div>
 								<div class="col-md-8">
 									<select class="form-control" th:name="idJabatan">
 										<option disabled="disabled" selected="selected">--
